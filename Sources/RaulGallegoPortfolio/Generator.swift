@@ -4,7 +4,7 @@ import Ignite
 struct SiteLayout: Layout {
     var body: some Document {
         Head {
-            MetaLink(href: "/css/main.css?v=20260907-5", rel: .stylesheet)
+            MetaLink(href: "/css/main.css?v=20260907-6", rel: .stylesheet)
             MetaLink(href: "/favicon.svg", rel: .icon)
             MetaTag(name: "theme-color", content: "#f5f5f7")
             MetaTag(name: "color-scheme", content: "light dark")
@@ -49,7 +49,7 @@ struct RaulGallegoSite: Site {
 
 struct Home: StaticPage {
     var title = "Raúl Gallego"
-    var description = "Junior iOS Developer en Barcelona con más de diez años de experiencia en el ecosistema Apple. Swift, SwiftUI, SwiftData y productos reales."
+    var description = "Junior iOS Developer en Barcelona. Swift 6, SwiftUI, SwiftData, Swift Testing y desarrollo de productos reales para plataformas Apple."
     var image = URL(string: "https://kontroldev.github.io/og.png")
 
     var body: some HTML {
@@ -63,7 +63,7 @@ struct ProfileHome: HTML {
             Section {
                 Text("KontrolDev · Barcelona").class("profile-kicker")
                 Text("Desarrollador iOS").font(.title1).class("profile-title")
-                Text("Convierto más de diez años resolviendo necesidades reales dentro del ecosistema Apple en aplicaciones iOS nativas, mantenibles y cuidadas.")
+                Text("Desarrollo aplicaciones iOS nativas con Swift 6 y SwiftUI, cuidando la arquitectura, los datos, las pruebas y la experiencia de uso.")
                     .class("profile-intro")
                 Text("Swift 6 · SwiftUI · SwiftData · Swift Testing")
                     .class("profile-summary")
@@ -71,14 +71,7 @@ struct ProfileHome: HTML {
             .class("profile-hero")
 
             Section {
-                ProfileProof(value: "+10 años", label: "Ecosistema Apple y atención a usuarios")
-                ProfileProof(value: "50–100", label: "Personas coordinadas en operaciones")
-                ProfileProof(value: "Producto real", label: "Viñe en desarrollo activo")
-            }
-            .class("profile-proof-grid")
-
-            Section {
-                Text("Experiencia").font(.title2).class("section-title")
+                Text("Desarrollo").font(.title2).class("section-title")
 
                 ProfessionalCard(
                     organization: "Kontrol Design Studio",
@@ -92,28 +85,6 @@ struct ProfileHome: HTML {
                 )
 
                 ProfessionalCard(
-                    organization: "MacServiceBcn · Especialistas en Apple",
-                    role: "Técnico informático · Especialista en Apple",
-                    meta: "May. 2025–actualidad · Barcelona",
-                    points: [
-                        "Gestiono la atención al cliente y el seguimiento de equipos, pedidos y servicios en un entorno técnico especializado en Apple.",
-                        "Combino resolución de problemas, comunicación y visión de producto para ofrecer una experiencia clara de principio a fin."
-                    ],
-                    tags: ["Hardware Apple", "Soporte técnico", "Operaciones", "Experiencia de usuario"]
-                )
-
-                ProfessionalCard(
-                    organization: "Comunidades oficiales de soporte de Apple",
-                    role: "Colaborador independiente",
-                    meta: "2016–actualidad · remoto",
-                    points: [
-                        "Comparto soluciones sobre macOS e iOS y traduzco problemas técnicos en respuestas comprensibles para usuarios reales.",
-                        "He recibido validaciones y recomendaciones de Apple por la calidad de mis aportaciones a la comunidad."
-                    ],
-                    tags: ["macOS", "iOS", "Resolución de problemas", "Comunicación"]
-                )
-
-                ProfessionalCard(
                     organization: "Comunidad MoureDev",
                     role: "Moderador y colaborador",
                     meta: "Comunidad de desarrollo de software",
@@ -122,17 +93,6 @@ struct ProfileHome: HTML {
                         "Participo en iniciativas colaborativas y conversaciones técnicas sobre Swift."
                     ],
                     tags: ["Comunidad", "Mentoría", "Swift", "Colaboración"]
-                )
-
-                ProfessionalCard(
-                    organization: "DM grup",
-                    role: "Responsable de planificación de operaciones",
-                    meta: "Dic. 2019–abr. 2023 · Barcelona",
-                    points: [
-                        "Coordiné cuentas, centros de trabajo, personas y turnos en operaciones con equipos de entre 50 y 100 profesionales.",
-                        "Aporto al desarrollo de producto experiencia real en planificación, priorización, comunicación y trabajo con múltiples responsables."
-                    ],
-                    tags: ["Liderazgo", "Planificación", "Priorización", "Trabajo en equipo"]
                 )
             }
             .class("profile-section")
@@ -198,7 +158,7 @@ struct ProfileHome: HTML {
 
             Section {
                 Text("Busco mi próximo equipo iOS").font(.title2)
-                Text("Quiero incorporarme como Junior iOS Developer a un equipo donde pueda seguir creciendo, aportar mi experiencia con usuarios Apple y participar en productos que lleguen al mercado.")
+                Text("Quiero incorporarme como Junior iOS Developer a un equipo donde pueda seguir creciendo y participar en productos que lleguen a usuarios reales.")
                 Link("Contactar por LinkedIn ↗", target: "https://www.linkedin.com/in/raulgallegoalonso/").class("career-cta")
             }
             .class("career-callout")
@@ -212,19 +172,6 @@ struct ProfileHome: HTML {
         }
         .class("profile-home shell")
         .id("contenido")
-    }
-}
-
-struct ProfileProof: HTML {
-    let value: String
-    let label: String
-
-    var body: some HTML {
-        Section {
-            Text(value).class("profile-proof-value")
-            Text(label).class("profile-proof-label")
-        }
-        .class("profile-proof")
     }
 }
 
