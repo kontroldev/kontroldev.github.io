@@ -1,6 +1,6 @@
-# Notas de Raúl Gallego
+# Portfolio y blog de Raúl Gallego
 
-Blog personal de [Raúl Gallego](https://github.com/kontroldev) sobre Swift, desarrollo para plataformas Apple y el trabajo detrás de Viñe.
+Portfolio profesional y blog de [Raúl Gallego](https://github.com/kontroldev), desarrollador iOS especializado en Swift, SwiftUI y SwiftData.
 
 La web está creada con Swift e [Ignite](https://github.com/twostraws/Ignite), se genera como un sitio completamente estático y se publica mediante GitHub Pages.
 
@@ -8,13 +8,14 @@ La web está creada con Swift e [Ignite](https://github.com/twostraws/Ignite), s
 
 ## Contenido
 
-- Portada con todas las notas ordenadas por fecha.
+- Portada profesional con presentación, experiencia, formación y proyectos públicos de GitHub.
+- Página de blog independiente en `/blog/`, con las notas ordenadas por fecha.
 - Entradas escritas en Markdown.
 - Filtros y páginas por etiquetas.
 - Tiempo estimado de lectura.
 - Índice interno para artículos extensos.
 - RSS, sitemap y metadatos para buscadores y redes sociales.
-- Diseño responsive con modos claro y oscuro, inspirado en la estructura del blog de Jorge Calderita y adaptado a la identidad azul de KontrolDev.
+- Diseño responsive con modos claro y oscuro, inspirado en la estructura del portfolio y blog de Jorge Calderita y adaptado a la identidad azul de KontrolDev.
 
 ## Estructura
 
@@ -38,7 +39,7 @@ La web está creada con Swift e [Ignite](https://github.com/twostraws/Ignite), s
 ```
 
 - `Content/blog/`: artículos Markdown y sus metadatos.
-- `Generator.swift`: portada, tarjetas, filtros, páginas de etiquetas y plantilla de artículo.
+- `Generator.swift`: perfil profesional, proyectos, blog, filtros, páginas de etiquetas y plantilla de artículo.
 - `Assets/css/main.css`: identidad visual y diseño responsive.
 - `Assets/vine-blog-card.svg`: portada reutilizada por la tarjeta y el artículo de Viñe.
 - `Includes/`: cabecera y pie compartidos.

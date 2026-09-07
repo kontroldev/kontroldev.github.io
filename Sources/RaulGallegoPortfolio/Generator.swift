@@ -48,18 +48,186 @@ struct RaulGallegoSite: Site {
 }
 
 struct Home: StaticPage {
-    @Environment(\.articles) private var articles
-
-    var title = "Blog"
-    var description = "Swift, Viñe y el trabajo detrás de cada decisión."
+    var title = "Raúl Gallego"
+    var description = "Desarrollador iOS en Barcelona. Swift, SwiftUI, SwiftData y aplicaciones nativas para el ecosistema Apple."
     var image = URL(string: "https://kontroldev.github.io/og.png")
 
-    private var notes: [Article] {
-        articles.typed("blog").sorted { $0.date > $1.date }
+    var body: some HTML {
+        ProfileHome()
     }
+}
+
+struct ProfileHome: HTML {
+    var body: some HTML {
+        Section {
+            Section {
+                Text("Desarrollador iOS").font(.title1).class("profile-title")
+                Text("Creo aplicaciones nativas para el ecosistema Apple, cuidando la arquitectura, la experiencia de uso y los detalles que convierten una idea en un producto útil.")
+                    .class("profile-intro")
+                Text("Swift · SwiftUI · SwiftData · Barcelona")
+                    .class("profile-summary")
+            }
+            .class("profile-hero")
+
+            Section {
+                Text("Experiencia").font(.title2).class("section-title")
+
+                ProfessionalCard(
+                    organization: "MacServiceBcn · Especialistas en Apple",
+                    role: "Experiencia profesional en el ecosistema Apple",
+                    meta: "Barcelona, España",
+                    points: [
+                        "Trabajo diario con tecnología Apple y resolución de necesidades reales de usuarios.",
+                        "Conocimiento del ecosistema desde la perspectiva técnica y de producto."
+                    ],
+                    tags: ["Apple", "Soporte técnico", "Experiencia de usuario"]
+                )
+
+                ProfessionalCard(
+                    organization: "Comunidad MoureDev",
+                    role: "Moderador y colaborador",
+                    meta: "Comunidad de desarrollo de software",
+                    points: [
+                        "Facilito conversaciones, comparto conocimiento y ayudo a mantener una experiencia positiva para la comunidad.",
+                        "Participo en iniciativas colaborativas y conversaciones técnicas sobre Swift."
+                    ],
+                    tags: ["Comunidad", "Mentoría", "Swift", "Colaboración"]
+                )
+            }
+            .class("profile-section")
+            .id("experiencia")
+
+            Section {
+                Text("Formación").font(.title2).class("section-title")
+
+                ProfessionalCard(
+                    organization: "Apple Coding Academy",
+                    role: "Formación avanzada en desarrollo Apple",
+                    meta: "2024–2025",
+                    points: [
+                        "Swift 6, SwiftUI, patrones de desarrollo y arquitectura.",
+                        "SwiftData, concurrencia con async/await, trabajo en red y Swift Testing."
+                    ],
+                    tags: ["Swift 6", "SwiftUI", "SwiftData", "Swift Testing"]
+                )
+            }
+            .class("profile-section")
+            .id("formacion")
+
+            Section {
+                Text("Proyectos").font(.title2).class("section-title")
+
+                Section {
+                    ProjectCard(
+                        name: "Viñe",
+                        status: "En desarrollo",
+                        description: "Aplicación iOS para organizar colecciones de cómics, seguir series y próximos lanzamientos, e importar y leer archivos CBZ y PDF.",
+                        url: "https://github.com/kontroldev/PanelMax-App",
+                        tags: ["Swift 6", "SwiftUI", "SwiftData", "StoreKit 2", "PDFKit"]
+                    )
+
+                    ProjectCard(
+                        name: "Proyecto Pomodoro",
+                        status: "Proyecto colaborativo",
+                        description: "Aplicación de productividad con métricas y estadísticas, desarrollada en colaboración con la comunidad MoureDev.",
+                        url: "https://github.com/kontroldev/Proyecto_1_Pomodoro",
+                        tags: ["Swift", "SwiftUI", "Colaboración"]
+                    )
+
+                    ProjectCard(
+                        name: "100 días de Swift",
+                        status: "Aprendizaje abierto",
+                        description: "Repositorio público que documenta práctica continuada y aprendizaje dentro del ecosistema Swift.",
+                        url: "https://github.com/kontroldev/100-dias-de-Swift-con-MoureDev",
+                        tags: ["Swift", "Práctica", "Comunidad"]
+                    )
+
+                    ProjectCard(
+                        name: "Mini‑Proyectos SwiftUI",
+                        status: "Laboratorio",
+                        description: "Colección de pequeñas aplicaciones para explorar componentes, patrones y posibilidades de SwiftUI.",
+                        url: "https://github.com/kontroldev/Mini-Proyectos-SwiftUI",
+                        tags: ["SwiftUI", "iOS", "Prototipos"]
+                    )
+                }
+                .class("project-list")
+            }
+            .class("profile-section")
+            .id("proyectos")
+
+            Section {
+                Text("Escribo sobre el proceso, no solo sobre el resultado.").font(.title2)
+                Text("En el blog documento decisiones, errores y aprendizajes mientras construyo Viñe y otros proyectos para plataformas Apple.")
+                Link("Leer el blog →", target: "/blog/").class("profile-cta")
+            }
+            .class("blog-callout")
+        }
+        .class("profile-home shell")
+        .id("contenido")
+    }
+}
+
+struct ProfessionalCard: HTML {
+    let organization: String
+    let role: String
+    let meta: String
+    let points: [String]
+    let tags: [String]
 
     var body: some HTML {
-        BlogListing(articles: notes)
+        Section {
+            Section {
+                Text(organization).font(.title3)
+                Text(role).class("professional-role")
+                Text(meta).class("professional-meta")
+            }
+            .class("professional-heading")
+
+            Section {
+                ForEach(points) { point in
+                    Text(point).class("professional-point")
+                }
+            }
+            .class("professional-copy")
+
+            TagRow(tags: tags)
+        }
+        .class("professional-card")
+    }
+}
+
+struct ProjectCard: HTML {
+    let name: String
+    let status: String
+    let description: String
+    let url: String
+    let tags: [String]
+
+    var body: some HTML {
+        Section {
+            Section {
+                Text(name).font(.title3)
+                Text(status).class("project-status")
+            }
+            .class("project-heading")
+            Text(description).class("project-description")
+            TagRow(tags: tags)
+            Link("Ver repositorio ↗", target: url).class("project-link")
+        }
+        .class("project-profile-card")
+    }
+}
+
+struct TagRow: HTML {
+    let tags: [String]
+
+    var body: some HTML {
+        Section {
+            ForEach(tags) { tag in
+                Text(tag)
+            }
+        }
+        .class("profile-tags")
     }
 }
 
@@ -139,7 +307,7 @@ struct NoteCard: HTML {
 struct NoteFilters: HTML {
     var body: some HTML {
         Section {
-            Link("Todos", target: "/").class("filter-chip active")
+            Link("Todos", target: "/blog/").class("filter-chip active")
             Link("Viñe", target: "/tags/vine/").class("filter-chip")
             Link("Swift", target: "/tags/swift/").class("filter-chip")
             Link("SwiftUI", target: "/tags/swift-u-i/").class("filter-chip")
@@ -154,7 +322,7 @@ struct NoteArticle: ArticlePage {
     var body: some HTML {
         Group {
             Section {
-                Link("← Todas las notas", target: "/").class("article-back")
+                Link("← Todas las notas", target: "/blog/").class("article-back")
                 Text(article.title).font(.title1).class("article-title")
                 Image("/vine-blog-card.svg", description: "Portada de \(article.title)")
                     .class("article-image")
@@ -168,7 +336,7 @@ struct NoteArticle: ArticlePage {
             .class("article-body")
 
             Section {
-                Link("Volver a todas las notas", target: "/").class("back-button")
+                Link("Volver a todas las notas", target: "/blog/").class("back-button")
             }
             .class("article-footer shell")
         }
@@ -182,7 +350,7 @@ struct NotesTagPage: TagPage {
 
     var body: some HTML {
         Section {
-            Link("← Todas las notas", target: "/").class("article-back")
+            Link("← Todas las notas", target: "/blog/").class("article-back")
             Text(tag.name == "All Tags" ? "Todas" : tag.name).font(.title1).class("page-title")
 
             Section {
