@@ -101,7 +101,9 @@ button:focus-visible {
 }
 
 .profile-home {
+  width: min(760px, calc(100% - 36px));
   padding: 30px 0 96px;
+  text-align: center;
 }
 .profile-hero { margin-bottom: 34px; }
 .profile-title {
@@ -115,7 +117,7 @@ button:focus-visible {
 }
 .profile-intro {
   max-width: 980px;
-  margin: 20px 0 0;
+  margin: 20px auto 0;
   color: var(--ink);
   font-size: 18px;
   line-height: 1.55;
@@ -142,6 +144,7 @@ button:focus-visible {
 .professional-heading {
   padding: 16px 18px;
   border-bottom: 1px solid var(--accent);
+  text-align: center;
 }
 .professional-heading h3,
 .project-heading h3 {
@@ -157,13 +160,12 @@ button:focus-visible {
 }
 .professional-copy { padding: 15px 18px 10px; }
 .professional-point {
-  position: relative;
   margin: 0 0 7px;
-  padding-left: 22px;
+  padding: 0;
+  text-align: center;
 }
 .professional-point::before {
-  position: absolute;
-  left: 3px;
+  margin-right: 7px;
   color: var(--accent);
   content: "•";
   font-weight: 800;
@@ -171,6 +173,7 @@ button:focus-visible {
 .profile-tags {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 8px 18px;
   padding: 12px 18px 15px;
   color: var(--accent);
@@ -180,7 +183,7 @@ button:focus-visible {
 .profile-tags p { margin: 0; }
 .project-list {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: 1fr;
   gap: 18px;
 }
 .project-profile-card {
@@ -193,9 +196,10 @@ button:focus-visible {
 }
 .project-heading {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  gap: 14px;
+  justify-content: center;
+  gap: 4px;
   padding: 16px 18px;
   border-bottom: 1px solid var(--accent);
 }
@@ -211,6 +215,7 @@ button:focus-visible {
   padding: 16px 18px 6px;
   color: var(--ink);
   line-height: 1.55;
+  text-align: center;
 }
 .project-profile-card .profile-tags { margin-top: auto; }
 .project-link {
@@ -220,6 +225,7 @@ button:focus-visible {
   border-top: 1px solid var(--accent);
   color: var(--accent);
   font-weight: 700;
+  text-align: center;
 }
 .project-link:hover { background: var(--accent-soft); }
 .blog-callout {
@@ -229,7 +235,7 @@ button:focus-visible {
   border-radius: 18px;
 }
 .blog-callout h2 { margin: 0 0 8px; color: var(--accent); font-size: 27px; }
-.blog-callout p { max-width: 760px; margin: 0 0 18px; }
+.blog-callout p { max-width: 650px; margin: 0 auto 18px; }
 .profile-cta {
   display: inline-block;
   padding: 8px 15px;
@@ -529,7 +535,7 @@ button:focus-visible {
   .profile-title { font-size: 32px; }
   .profile-intro { font-size: 16px; }
   .section-title { font-size: 27px; }
-  .project-heading { align-items: flex-start; flex-direction: column; gap: 4px; }
+  .project-heading { align-items: center; }
   .blog-callout { padding: 22px 20px; }
   .page-title,
   .blog-home > h1,
