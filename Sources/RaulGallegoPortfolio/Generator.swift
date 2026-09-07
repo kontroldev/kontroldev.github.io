@@ -4,7 +4,7 @@ import Ignite
 struct SiteLayout: Layout {
     var body: some Document {
         Head {
-            MetaLink(href: "/css/main.css?v=20260907-4", rel: .stylesheet)
+            MetaLink(href: "/css/main.css?v=20260907-5", rel: .stylesheet)
             MetaLink(href: "/favicon.svg", rel: .icon)
             MetaTag(name: "theme-color", content: "#f5f5f7")
             MetaTag(name: "color-scheme", content: "light dark")

@@ -122,8 +122,16 @@ button:focus-visible {
 
 .profile-home {
   width: min(760px, calc(100% - 36px));
+  margin-inline: auto;
   padding: 30px 0 96px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
+}
+.profile-home > * {
+  width: 100%;
+  margin-inline: auto;
 }
 .profile-hero {
   position: relative;
@@ -396,8 +404,11 @@ button:focus-visible {
 
 .blog-home,
 .tag-page {
+  width: min(760px, calc(100% - 36px));
+  margin-inline: auto;
   min-height: calc(100vh - 142px);
   padding: 30px 0 70px;
+  text-align: center;
 }
 .blog-kicker { text-align: center; }
 .page-title,
@@ -415,6 +426,7 @@ button:focus-visible {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+  justify-content: center;
   gap: 8px;
   margin: 28px 0 46px;
 }
@@ -433,7 +445,7 @@ button:focus-visible {
   color: #fff;
 }
 .rss-link {
-  margin-left: auto;
+  margin-left: 0;
   color: var(--ink);
   font-weight: 600;
 }
@@ -441,6 +453,8 @@ button:focus-visible {
 
 .notes-grid {
   display: grid;
+  width: 100%;
+  margin-inline: auto;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 335px));
   justify-content: center;
   gap: 24px;
@@ -454,6 +468,7 @@ button:focus-visible {
   border-radius: 22px;
   background: color-mix(in srgb, var(--surface) 94%, transparent);
   box-shadow: 0 12px 34px rgba(0, 72, 145, 0.08);
+  text-align: center;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 .note-card:hover {
