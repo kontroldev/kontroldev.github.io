@@ -1,6 +1,6 @@
-# Portfolio de Raúl Gallego
+# Portfolio y notas de Raúl Gallego
 
-Portfolio personal de [Raúl Gallego](https://github.com/kontroldev), desarrollador de aplicaciones para el ecosistema Apple. La web está creada con Swift e [Ignite](https://github.com/twostraws/Ignite), se genera como un sitio completamente estático y se publica mediante GitHub Pages.
+Portfolio y cuaderno de desarrollo de [Raúl Gallego](https://github.com/kontroldev), desarrollador de aplicaciones para el ecosistema Apple. La web está creada con Swift e [Ignite](https://github.com/twostraws/Ignite), se genera como un sitio completamente estático y se publica mediante GitHub Pages.
 
 **Web:** [kontroldev.github.io](https://kontroldev.github.io)
 
@@ -8,6 +8,8 @@ Portfolio personal de [Raúl Gallego](https://github.com/kontroldev), desarrolla
 
 - Presentación profesional y enlaces de contacto.
 - Proyecto destacado con sus tecnologías principales.
+- Sección de últimas notas en la portada.
+- Archivo de artículos con etiquetas, tiempo de lectura y RSS.
 - Diseño responsive para escritorio, tablet y móvil.
 - Compatibilidad automática con los modos claro y oscuro del sistema.
 - Metadatos básicos para buscadores y redes sociales.
@@ -30,9 +32,11 @@ Este portfolio combina Ignite con HTML personalizado:
 1. `Package.swift` declara el proyecto como un ejecutable Swift y añade Ignite como dependencia.
 2. `PortfolioLayout` construye el documento común e incorpora la hoja de estilos y los metadatos.
 3. `Portfolio` adopta `Site` y configura el nombre, la URL, el idioma, la descripción y la página inicial.
-4. `Home` adopta `StaticPage` e inserta el contenido de `Includes/home.html` mediante `Include`.
-5. `Generator.main()` llama a `site.publish(...)` para generar el resultado final en `Build/`.
-6. Los archivos de `Assets/` se copian al sitio generado conservando su organización.
+4. `Home` y `Blog` adoptan `StaticPage` para generar la portada y el archivo de notas.
+5. `NoteArticle` adopta `ArticlePage` y aplica una presentación común a los Markdown de `Content/blog/`.
+6. `NotesTagPage` genera automáticamente una página para cada etiqueta.
+7. `Generator.main()` llama a `site.publish(...)` para generar el resultado final en `Build/`.
+8. Los archivos de `Assets/` se copian al sitio generado conservando su organización.
 
 El punto de entrada se encuentra en `Sources/RaulGallegoPortfolio/Generator.swift`:
 
@@ -59,8 +63,13 @@ struct Generator {
 ├── Assets/
 │   ├── css/main.css
 │   └── og.png
+├── Content/blog/
+│   └── vine-una-app-para-tu-coleccion.md
 ├── Includes/
-│   └── home.html
+│   ├── home.html
+│   ├── home-end.html
+│   ├── site-header.html
+│   └── site-footer.html
 ├── Sources/RaulGallegoPortfolio/
 │   └── Generator.swift
 ├── Package.resolved
@@ -69,6 +78,7 @@ struct Generator {
 ```
 
 - `Sources/`: configuración del sitio, layout, página inicial y proceso de generación.
+- `Content/blog/`: entradas escritas en Markdown con sus metadatos editoriales.
 - `Includes/`: fragmentos HTML incorporados por Ignite.
 - `Assets/`: estilos e imágenes que se copian al resultado final.
 - `Build/`: web generada. Se crea de nuevo en cada compilación y no debe editarse manualmente.
@@ -114,10 +124,27 @@ ignite run --preview
 ## Cómo modificar esta web
 
 - Edita el contenido visible en `Includes/home.html`.
+- Añade nuevas entradas como archivos Markdown dentro de `Content/blog/`.
 - Ajusta colores, tipografía, composición y breakpoints en `Assets/css/main.css`.
 - Cambia el título, la descripción, la URL o los metadatos sociales en `Generator.swift`.
 - Ejecuta `swift run` después de cada cambio para regenerar `Build/`.
 - Comprueba el resultado desde un servidor local en varios tamaños de pantalla y en modo claro y oscuro.
+
+### Añadir una nota
+
+Crea un archivo Markdown en `Content/blog/` con una cabecera como esta:
+
+```yaml
+---
+title: Título de la nota
+subtitle: Una explicación breve.
+date: 2026-09-07
+author: Raúl Gallego
+tags: Swift, SwiftUI, Producto
+---
+```
+
+Después escribe el artículo debajo de la cabecera y ejecuta `swift run`. Ignite actualizará el archivo del blog, las páginas de etiquetas, el RSS y la sección de últimas notas de la portada.
 
 ## Crear una web similar desde cero
 
