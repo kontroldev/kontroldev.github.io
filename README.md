@@ -1,61 +1,22 @@
-# Portfolio y notas de Raúl Gallego
+# Notas de Raúl Gallego
 
-Portfolio y cuaderno de desarrollo de [Raúl Gallego](https://github.com/kontroldev), desarrollador de aplicaciones para el ecosistema Apple. La web está creada con Swift e [Ignite](https://github.com/twostraws/Ignite), se genera como un sitio completamente estático y se publica mediante GitHub Pages.
+Blog personal de [Raúl Gallego](https://github.com/kontroldev) sobre Swift, desarrollo para plataformas Apple y el trabajo detrás de Viñe.
+
+La web está creada con Swift e [Ignite](https://github.com/twostraws/Ignite), se genera como un sitio completamente estático y se publica mediante GitHub Pages.
 
 **Web:** [kontroldev.github.io](https://kontroldev.github.io)
 
-## Qué contiene
+## Contenido
 
-- Presentación profesional y enlaces de contacto.
-- Proyecto destacado con sus tecnologías principales.
-- Sección de últimas notas en la portada.
-- Archivo de artículos con etiquetas, tiempo de lectura y RSS.
-- Diseño responsive para escritorio, tablet y móvil.
-- Compatibilidad automática con los modos claro y oscuro del sistema.
-- Metadatos básicos para buscadores y redes sociales.
-- Navegación accesible, enlace para saltar al contenido y soporte para movimiento reducido.
+- Portada con todas las notas ordenadas por fecha.
+- Entradas escritas en Markdown.
+- Filtros y páginas por etiquetas.
+- Tiempo estimado de lectura.
+- Índice interno para artículos extensos.
+- RSS, sitemap y metadatos para buscadores y redes sociales.
+- Diseño responsive con modos claro y oscuro automáticos.
 
-## Tecnologías
-
-- **Swift 6** para definir y ejecutar el generador.
-- **Ignite 0.6.9** para convertir la estructura del sitio en archivos estáticos.
-- **HTML y CSS** para el contenido editorial y el diseño visual personalizado.
-- **Swift Package Manager** para gestionar Ignite y sus dependencias.
-- **GitHub Actions y GitHub Pages** para compilar y publicar automáticamente la web.
-
-## Cómo está creada con Ignite
-
-Ignite es un generador de sitios estáticos para desarrolladores Swift. Permite describir la estructura de una web con tipos y una sintaxis familiar para quien trabaja con Swift, y después produce HTML, CSS, JavaScript y otros recursos listos para servir desde cualquier alojamiento estático.
-
-Este portfolio combina Ignite con HTML personalizado:
-
-1. `Package.swift` declara el proyecto como un ejecutable Swift y añade Ignite como dependencia.
-2. `PortfolioLayout` construye el documento común e incorpora la hoja de estilos y los metadatos.
-3. `Portfolio` adopta `Site` y configura el nombre, la URL, el idioma, la descripción y la página inicial.
-4. `Home` y `Blog` adoptan `StaticPage` para generar la portada y el archivo de notas.
-5. `NoteArticle` adopta `ArticlePage` y aplica una presentación común a los Markdown de `Content/blog/`.
-6. `NotesTagPage` genera automáticamente una página para cada etiqueta.
-7. `Generator.main()` llama a `site.publish(...)` para generar el resultado final en `Build/`.
-8. Los archivos de `Assets/` se copian al sitio generado conservando su organización.
-
-El punto de entrada se encuentra en `Sources/RaulGallegoPortfolio/Generator.swift`:
-
-```swift
-@main
-struct Generator {
-    @MainActor
-    static func main() async throws {
-        var site = Portfolio()
-        try await site.publish(
-            sourceDirectory: URL(filePath: FileManager.default.currentDirectoryPath),
-            buildDirectory: URL(filePath: FileManager.default.currentDirectoryPath)
-                .appending(path: "Build")
-        )
-    }
-}
-```
-
-## Estructura del proyecto
+## Estructura
 
 ```text
 .
@@ -66,8 +27,6 @@ struct Generator {
 ├── Content/blog/
 │   └── vine-una-app-para-tu-coleccion.md
 ├── Includes/
-│   ├── home.html
-│   ├── home-end.html
 │   ├── site-header.html
 │   └── site-footer.html
 ├── Sources/RaulGallegoPortfolio/
@@ -77,62 +36,15 @@ struct Generator {
 └── README.md
 ```
 
-- `Sources/`: configuración del sitio, layout, página inicial y proceso de generación.
-- `Content/blog/`: entradas escritas en Markdown con sus metadatos editoriales.
-- `Includes/`: fragmentos HTML incorporados por Ignite.
-- `Assets/`: estilos e imágenes que se copian al resultado final.
-- `Build/`: web generada. Se crea de nuevo en cada compilación y no debe editarse manualmente.
-- `.github/workflows/pages.yml`: automatización de compilación y despliegue.
+- `Content/blog/`: artículos Markdown y sus metadatos.
+- `Generator.swift`: portada, tarjetas, filtros, páginas de etiquetas y plantilla de artículo.
+- `Assets/css/main.css`: identidad visual y diseño responsive.
+- `Includes/`: cabecera y pie compartidos.
+- `Build/`: resultado generado por Ignite; no debe editarse manualmente.
 
-## Ejecutar el portfolio en local
+## Añadir una nota
 
-### Requisitos
-
-- macOS 14 o posterior.
-- Xcode o las Command Line Tools con soporte para Swift 6.
-- Git.
-
-### Generar la web
-
-```sh
-git clone https://github.com/kontroldev/kontroldev.github.io.git
-cd kontroldev.github.io
-swift package resolve
-swift run
-```
-
-Al terminar, Ignite crea la web en `Build/`.
-
-### Previsualizarla
-
-Es recomendable servir `Build/` mediante un servidor local. Abrir `Build/index.html` directamente puede impedir que el navegador encuentre rutas absolutas como `/css/main.css`.
-
-Por ejemplo, con Python:
-
-```sh
-python3 -m http.server 8000 --directory Build
-```
-
-Después abre [http://localhost:8000](http://localhost:8000) en el navegador.
-
-Si tienes instalada la herramienta de línea de comandos de Ignite, también puedes usar su modo de previsualización:
-
-```sh
-ignite run --preview
-```
-
-## Cómo modificar esta web
-
-- Edita el contenido visible en `Includes/home.html`.
-- Añade nuevas entradas como archivos Markdown dentro de `Content/blog/`.
-- Ajusta colores, tipografía, composición y breakpoints en `Assets/css/main.css`.
-- Cambia el título, la descripción, la URL o los metadatos sociales en `Generator.swift`.
-- Ejecuta `swift run` después de cada cambio para regenerar `Build/`.
-- Comprueba el resultado desde un servidor local en varios tamaños de pantalla y en modo claro y oscuro.
-
-### Añadir una nota
-
-Crea un archivo Markdown en `Content/blog/` con una cabecera como esta:
+Crea un archivo Markdown dentro de `Content/blog/`:
 
 ```yaml
 ---
@@ -142,79 +54,42 @@ date: 2026-09-07
 author: Raúl Gallego
 tags: Swift, SwiftUI, Producto
 ---
+
+# Título de la nota
+
+Contenido del artículo.
 ```
 
-Después escribe el artículo debajo de la cabecera y ejecuta `swift run`. Ignite actualizará el archivo del blog, las páginas de etiquetas, el RSS y la sección de últimas notas de la portada.
+El primer encabezado Markdown permite que Ignite identifique correctamente el título y no se repite dentro del cuerpo del artículo.
 
-## Crear una web similar desde cero
+Al generar la web, Ignite actualiza automáticamente la portada, las páginas de etiquetas, el RSS y el sitemap.
 
-La forma más directa de reproducir este enfoque es crear un paquete ejecutable de Swift y añadir Ignite como dependencia:
+## Generar y revisar en local
+
+Requisitos: macOS 14 o posterior, Swift 6 y Git.
 
 ```sh
-mkdir MiPortfolio
-cd MiPortfolio
-swift package init --type executable
-mkdir -p Assets/css Includes
-mkdir -p Sources/MiPortfolio
-mv Sources/main.swift Sources/MiPortfolio/Generator.swift
+git clone https://github.com/kontroldev/kontroldev.github.io.git
+cd kontroldev.github.io
+swift package resolve
+swift run
+python3 -m http.server 8000 --directory Build
 ```
 
-En `Package.swift`, añade Ignite al paquete y al target ejecutable:
+Después abre [http://localhost:8000](http://localhost:8000).
 
-```swift
-// swift-tools-version: 6.0
-import PackageDescription
-
-let package = Package(
-    name: "MiPortfolio",
-    platforms: [.macOS(.v14)],
-    dependencies: [
-        .package(
-            url: "https://github.com/twostraws/Ignite.git",
-            from: "0.6.0"
-        )
-    ],
-    targets: [
-        .executableTarget(
-            name: "MiPortfolio",
-            dependencies: [
-                .product(name: "Ignite", package: "Ignite")
-            ]
-        )
-    ]
-)
-```
-
-A continuación:
-
-1. Crea un tipo que adopte `Layout` para definir la estructura común del documento.
-2. Crea un tipo que adopte `StaticPage` para cada página estática.
-3. Crea un tipo que adopte `Site` y asigna su página inicial y su layout.
-4. Añade un punto de entrada `@main` que ejecute `publish()`.
-5. Coloca recursos estáticos en `Assets/` y, si los necesitas, fragmentos HTML en `Includes/`.
-6. Ejecuta `swift run` y sirve la carpeta `Build/` localmente.
-
-Ignite también dispone de una herramienta de línea de comandos capaz de crear una plantilla inicial con:
+También puedes previsualizarla con la herramienta de Ignite:
 
 ```sh
-ignite new MiPortfolio
+ignite run --preview
 ```
 
-La documentación y las instrucciones para instalar esa herramienta están en el [repositorio oficial de Ignite](https://github.com/twostraws/Ignite).
+## Publicación
 
-## Publicación en GitHub Pages
-
-Cada `push` a `main` inicia el workflow `.github/workflows/pages.yml`:
-
-1. GitHub Actions descarga el repositorio.
-2. Ejecuta `swift run -c release` en macOS.
-3. Sube la carpeta `Build/` como artefacto de Pages.
-4. El job de despliegue publica el artefacto en GitHub Pages.
-
-Para reutilizar el workflow en otro repositorio, configura **Settings → Pages → Build and deployment → Source** con la opción **GitHub Actions** y adapta la propiedad `url` del tipo `Site` al dominio final.
+Cada `push` a `main` inicia `.github/workflows/pages.yml`. GitHub Actions genera la web con `swift run -c release` y publica el contenido de `Build/` en GitHub Pages.
 
 ## Recursos
 
-- [Repositorio oficial de Ignite](https://github.com/twostraws/Ignite)
-- [Documentación de GitHub Pages](https://docs.github.com/pages)
-- [Código fuente de este portfolio](https://github.com/kontroldev/kontroldev.github.io)
+- [Ignite](https://github.com/twostraws/Ignite)
+- [GitHub Pages](https://docs.github.com/pages)
+- [Código fuente de la web](https://github.com/kontroldev/kontroldev.github.io)

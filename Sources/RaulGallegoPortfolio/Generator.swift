@@ -1,7 +1,7 @@
 import Foundation
 import Ignite
 
-struct PortfolioLayout: Layout {
+struct SiteLayout: Layout {
     var body: some Document {
         Head {
             MetaLink(href: "/css/main.css", rel: .stylesheet)
@@ -19,15 +19,15 @@ struct PortfolioLayout: Layout {
     }
 }
 
-struct Portfolio: Site {
+struct RaulGallegoSite: Site {
     var name = "Raúl Gallego"
     var titleSuffix = " — Desarrollo iOS"
-    var description: String? = "Portfolio y notas de Raúl Gallego, desarrollador iOS especializado en Swift y SwiftUI."
+    var description: String? = "Notas de Raúl Gallego sobre Swift, desarrollo para plataformas Apple y Viñe."
     var url = URL(string: "https://kontroldev.github.io")!
     var author = "Raúl Gallego"
     var language: Language = .spanishSpain
     var homePage = Home()
-    var layout = PortfolioLayout()
+    var layout = SiteLayout()
     var useDefaultBootstrapURLs: BootstrapOptions = .none
     var builtInIconsEnabled: BootstrapOptions = .none
     var feedConfiguration = FeedConfiguration(
@@ -37,7 +37,7 @@ struct Portfolio: Site {
     )
 
     var staticPages: [any StaticPage] {
-        Blog()
+        BlogArchive()
     }
 
     var articlePages: [any ArticlePage] {
@@ -50,28 +50,24 @@ struct Portfolio: Site {
 struct Home: StaticPage {
     @Environment(\.articles) private var articles
 
-    var title = "Raúl Gallego — Desarrollo apps para el ecosistema Apple"
-    var description = "Portfolio y notas de Raúl Gallego, desarrollador iOS especializado en Swift y SwiftUI."
+    var title = "Notas"
+    var description = "Swift, Viñe y el trabajo detrás de cada decisión."
     var image = URL(string: "https://kontroldev.github.io/og.png")
 
-    private var latestNotes: [Article] {
-        Array(articles.typed("blog").sorted { $0.date > $1.date }.prefix(3))
+    private var notes: [Article] {
+        articles.typed("blog").sorted { $0.date > $1.date }
     }
 
     var body: some HTML {
-        Group {
-            Include("home.html")
-            LatestNotes(articles: latestNotes)
-            Include("home-end.html")
-        }
+        BlogListing(articles: notes)
     }
 }
 
-struct Blog: StaticPage {
+struct BlogArchive: StaticPage {
     @Environment(\.articles) private var articles
 
     var title = "Notas"
-    var description = "Artículos sobre Swift, desarrollo para plataformas Apple y el trabajo detrás de Viñe."
+    var description = "Swift, Viñe y el trabajo detrás de cada decisión."
     var path = "/blog/"
 
     private var notes: [Article] {
@@ -79,41 +75,20 @@ struct Blog: StaticPage {
     }
 
     var body: some HTML {
-        Section {
-            Section {
-                Text("Cuaderno de desarrollo").class("kicker")
-                Text("Notas sobre construir para Apple.").font(.title1)
-                Text("Swift, producto y las decisiones que convierten una idea en una aplicación.")
-                    .class("blog-intro")
-            }
-            .class("blog-heading")
-
-            NoteFilters()
-
-            Section {
-                ForEach(notes) { article in
-                    NoteCard(article: article)
-                }
-            }
-            .class("notes-grid")
-        }
-        .class("blog-page shell")
-        .id("contenido")
+        BlogListing(articles: notes)
     }
 }
 
-struct LatestNotes: HTML {
+struct BlogListing: HTML {
     let articles: [Article]
 
     var body: some HTML {
         Section {
-            Section {
-                Text("Últimas notas").class("kicker")
-                Text("El trabajo detrás del producto.").font(.title2)
-                Text("Decisiones, errores y aprendizajes mientras construyo para el ecosistema Apple.")
-                    .class("notes-section-copy")
-            }
-            .class("section-heading")
+            Text("Notas").font(.title1)
+            Text("Swift, Viñe y el trabajo detrás de cada decisión.")
+                .class("blog-intro")
+
+            NoteFilters()
 
             Section {
                 ForEach(articles) { article in
@@ -121,12 +96,9 @@ struct LatestNotes: HTML {
                 }
             }
             .class("notes-grid")
-
-            Link("Ver todas las notas →", target: "/blog/")
-                .class("all-notes-link")
         }
-        .class("notes-section shell")
-        .id("notas")
+        .class("blog-home shell")
+        .id("contenido")
     }
 }
 
@@ -162,7 +134,7 @@ struct NoteCard: HTML {
 struct NoteFilters: HTML {
     var body: some HTML {
         Section {
-            Link("Todos", target: "/blog/").class("filter-chip active")
+            Link("Todos", target: "/").class("filter-chip active")
             Link("Viñe", target: "/tags/vine/").class("filter-chip")
             Link("Swift", target: "/tags/swift/").class("filter-chip")
             Link("SwiftUI", target: "/tags/swift-u-i/").class("filter-chip")
@@ -177,7 +149,7 @@ struct NoteArticle: ArticlePage {
     var body: some HTML {
         Group {
             Section {
-                Link("← Todas las notas", target: "/blog/").class("article-back")
+                Link("← Todas las notas", target: "/").class("article-back")
                 Text(article.tags?.joined(separator: " · ") ?? "Notas").class("kicker")
                 Text(article.title).font(.title1).class("article-title")
                 Text(article.description).class("article-intro")
@@ -193,7 +165,7 @@ struct NoteArticle: ArticlePage {
             .class("article-body")
 
             Section {
-                Link("Volver a todas las notas", target: "/blog/").class("button secondary")
+                Link("Volver a todas las notas", target: "/").class("back-button")
             }
             .class("article-footer shell")
         }
@@ -207,9 +179,9 @@ struct NotesTagPage: TagPage {
 
     var body: some HTML {
         Section {
-            Link("← Todas las notas", target: "/blog/").class("article-back")
+            Link("← Todas las notas", target: "/").class("article-back")
             Text("Etiqueta").class("kicker")
-            Text(tag.name == "All Tags" ? "Todas las etiquetas" : tag.name).font(.title1)
+            Text(tag.name == "All Tags" ? "Todas" : tag.name).font(.title1)
 
             Section {
                 ForEach(notes) { article in
@@ -218,7 +190,7 @@ struct NotesTagPage: TagPage {
             }
             .class("notes-grid tag-notes-grid")
         }
-        .class("blog-page shell")
+        .class("tag-page shell")
         .id("contenido")
     }
 }
@@ -242,7 +214,7 @@ private func articleBody(_ html: String) -> String {
 struct Generator {
     @MainActor
     static func main() async throws {
-        var site = Portfolio()
+        var site = RaulGallegoSite()
         try await site.publish(
             sourceDirectory: URL(filePath: FileManager.default.currentDirectoryPath),
             buildDirectory: URL(filePath: FileManager.default.currentDirectoryPath).appending(path: "Build")
