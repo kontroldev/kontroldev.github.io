@@ -639,9 +639,14 @@ button:focus-visible {
 .footer p { margin: 0; }
 .footer-tech {
   color: var(--muted);
-  font-size: 11px;
+  font-size: 13px;
   font-weight: 550;
 }
+.footer-tech a {
+  color: var(--accent);
+  font-weight: 700;
+}
+.footer-tech a:hover { text-decoration: underline; text-underline-offset: 3px; }
 .footer-links { display: flex; gap: 9px; font-size: 15px; }
 .footer-links a {
   padding: 5px 9px;
