@@ -4,7 +4,7 @@ import Ignite
 struct SiteLayout: Layout {
     var body: some Document {
         Head {
-            MetaLink(href: "/css/main.css?v=20260907-3", rel: .stylesheet)
+            MetaLink(href: "/css/main.css?v=20260907-4", rel: .stylesheet)
             MetaLink(href: "/favicon.svg", rel: .icon)
             MetaTag(name: "theme-color", content: "#f5f5f7")
             MetaTag(name: "color-scheme", content: "light dark")
@@ -49,7 +49,7 @@ struct RaulGallegoSite: Site {
 
 struct Home: StaticPage {
     var title = "Raúl Gallego"
-    var description = "Desarrollador iOS en Barcelona. Swift, SwiftUI, SwiftData y aplicaciones nativas para el ecosistema Apple."
+    var description = "Junior iOS Developer en Barcelona con más de diez años de experiencia en el ecosistema Apple. Swift, SwiftUI, SwiftData y productos reales."
     var image = URL(string: "https://kontroldev.github.io/og.png")
 
     var body: some HTML {
@@ -63,25 +63,54 @@ struct ProfileHome: HTML {
             Section {
                 Text("KontrolDev · Barcelona").class("profile-kicker")
                 Text("Desarrollador iOS").font(.title1).class("profile-title")
-                Text("Creo aplicaciones nativas para el ecosistema Apple, cuidando la arquitectura, la experiencia de uso y los detalles que convierten una idea en un producto útil.")
+                Text("Convierto más de diez años resolviendo necesidades reales dentro del ecosistema Apple en aplicaciones iOS nativas, mantenibles y cuidadas.")
                     .class("profile-intro")
-                Text("Swift · SwiftUI · SwiftData · Barcelona")
+                Text("Swift 6 · SwiftUI · SwiftData · Swift Testing")
                     .class("profile-summary")
             }
             .class("profile-hero")
 
             Section {
+                ProfileProof(value: "+10 años", label: "Ecosistema Apple y atención a usuarios")
+                ProfileProof(value: "50–100", label: "Personas coordinadas en operaciones")
+                ProfileProof(value: "Producto real", label: "Viñe en desarrollo activo")
+            }
+            .class("profile-proof-grid")
+
+            Section {
                 Text("Experiencia").font(.title2).class("section-title")
 
                 ProfessionalCard(
-                    organization: "MacServiceBcn · Especialistas en Apple",
-                    role: "Experiencia profesional en el ecosistema Apple",
-                    meta: "Barcelona, España",
+                    organization: "Kontrol Design Studio",
+                    role: "iOS Developer & Founder",
+                    meta: "Mar. 2026–actualidad · Barcelona",
                     points: [
-                        "Trabajo diario con tecnología Apple y resolución de necesidades reales de usuarios.",
-                        "Conocimiento del ecosistema desde la perspectiva técnica y de producto."
+                        "Desarrollo productos para plataformas Apple desde el concepto y la experiencia de uso hasta la arquitectura, implementación y pruebas.",
+                        "Construyo Viñe como un producto real, haciendo evolucionar una base de código mantenible más allá de ejercicios y tutoriales."
                     ],
-                    tags: ["Apple", "Soporte técnico", "Experiencia de usuario"]
+                    tags: ["Swift", "SwiftUI", "Arquitectura", "Testing", "Producto"]
+                )
+
+                ProfessionalCard(
+                    organization: "MacServiceBcn · Especialistas en Apple",
+                    role: "Técnico informático · Especialista en Apple",
+                    meta: "May. 2025–actualidad · Barcelona",
+                    points: [
+                        "Gestiono la atención al cliente y el seguimiento de equipos, pedidos y servicios en un entorno técnico especializado en Apple.",
+                        "Combino resolución de problemas, comunicación y visión de producto para ofrecer una experiencia clara de principio a fin."
+                    ],
+                    tags: ["Hardware Apple", "Soporte técnico", "Operaciones", "Experiencia de usuario"]
+                )
+
+                ProfessionalCard(
+                    organization: "Comunidades oficiales de soporte de Apple",
+                    role: "Colaborador independiente",
+                    meta: "2016–actualidad · remoto",
+                    points: [
+                        "Comparto soluciones sobre macOS e iOS y traduzco problemas técnicos en respuestas comprensibles para usuarios reales.",
+                        "He recibido validaciones y recomendaciones de Apple por la calidad de mis aportaciones a la comunidad."
+                    ],
+                    tags: ["macOS", "iOS", "Resolución de problemas", "Comunicación"]
                 )
 
                 ProfessionalCard(
@@ -93,6 +122,17 @@ struct ProfileHome: HTML {
                         "Participo en iniciativas colaborativas y conversaciones técnicas sobre Swift."
                     ],
                     tags: ["Comunidad", "Mentoría", "Swift", "Colaboración"]
+                )
+
+                ProfessionalCard(
+                    organization: "DM grup",
+                    role: "Responsable de planificación de operaciones",
+                    meta: "Dic. 2019–abr. 2023 · Barcelona",
+                    points: [
+                        "Coordiné cuentas, centros de trabajo, personas y turnos en operaciones con equipos de entre 50 y 100 profesionales.",
+                        "Aporto al desarrollo de producto experiencia real en planificación, priorización, comunicación y trabajo con múltiples responsables."
+                    ],
+                    tags: ["Liderazgo", "Planificación", "Priorización", "Trabajo en equipo"]
                 )
             }
             .class("profile-section")
@@ -157,6 +197,13 @@ struct ProfileHome: HTML {
             .id("proyectos")
 
             Section {
+                Text("Busco mi próximo equipo iOS").font(.title2)
+                Text("Quiero incorporarme como Junior iOS Developer a un equipo donde pueda seguir creciendo, aportar mi experiencia con usuarios Apple y participar en productos que lleguen al mercado.")
+                Link("Contactar por LinkedIn ↗", target: "https://www.linkedin.com/in/raulgallegoalonso/").class("career-cta")
+            }
+            .class("career-callout")
+
+            Section {
                 Text("Escribo sobre el proceso, no solo sobre el resultado.").font(.title2)
                 Text("En el blog documento decisiones, errores y aprendizajes mientras construyo Viñe y otros proyectos para plataformas Apple.")
                 Link("Leer el blog →", target: "/blog/").class("profile-cta")
@@ -165,6 +212,19 @@ struct ProfileHome: HTML {
         }
         .class("profile-home shell")
         .id("contenido")
+    }
+}
+
+struct ProfileProof: HTML {
+    let value: String
+    let label: String
+
+    var body: some HTML {
+        Section {
+            Text(value).class("profile-proof-value")
+            Text(label).class("profile-proof-label")
+        }
+        .class("profile-proof")
     }
 }
 
