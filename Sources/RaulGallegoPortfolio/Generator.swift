@@ -4,7 +4,7 @@ import Ignite
 struct SiteLayout: Layout {
     var body: some Document {
         Head {
-            MetaLink(href: "/css/main.css?v=20260907-2", rel: .stylesheet)
+            MetaLink(href: "/css/main.css?v=20260907-3", rel: .stylesheet)
             MetaLink(href: "/favicon.svg", rel: .icon)
             MetaTag(name: "theme-color", content: "#f5f5f7")
             MetaTag(name: "color-scheme", content: "light dark")
@@ -61,6 +61,7 @@ struct ProfileHome: HTML {
     var body: some HTML {
         Section {
             Section {
+                Text("KontrolDev · Barcelona").class("profile-kicker")
                 Text("Desarrollador iOS").font(.title1).class("profile-title")
                 Text("Creo aplicaciones nativas para el ecosistema Apple, cuidando la arquitectura, la experiencia de uso y los detalles que convierten una idea en un producto útil.")
                     .class("profile-intro")
@@ -252,6 +253,7 @@ struct BlogListing: HTML {
 
     var body: some HTML {
         Section {
+            Text("Cuaderno de desarrollo").class("blog-kicker")
             Text("Blog").font(.title1).class("page-title")
 
             NoteFilters()
