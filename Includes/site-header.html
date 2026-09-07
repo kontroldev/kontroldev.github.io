@@ -1,12 +1,28 @@
 <a class="skip-link" href="#contenido">Saltar al contenido</a>
 <header class="site-header">
   <nav class="nav shell" aria-label="Navegación principal">
-    <a class="signature" href="/" aria-label="Raúl Gallego, inicio">Raúl Gallego<span>.</span></a>
+    <a class="signature" href="/" aria-label="Raúl Gallego, inicio">Raúl Gallego</a>
     <div class="nav-links">
-      <a class="nav-notes" href="/">Notas</a>
-      <a class="nav-vine" href="/tags/vine/">Viñe</a>
-      <a class="nav-secondary" href="https://github.com/kontroldev" rel="me">GitHub</a>
-      <a class="nav-contact" href="https://www.linkedin.com/in/raulgallegoalonso">LinkedIn</a>
+      <a href="/">Blog</a>
+      <a href="/tags/vine/">Viñe</a>
+      <a href="/feed.rss">RSS</a>
+    </div>
+    <div class="nav-tools">
+      <a href="https://github.com/kontroldev" rel="me" aria-label="GitHub">GitHub</a>
+      <button id="theme-toggle" type="button" aria-label="Cambiar tema">◐</button>
     </div>
   </nav>
 </header>
+<script>
+  (() => {
+    const root = document.documentElement;
+    const button = document.getElementById("theme-toggle");
+    const saved = localStorage.getItem("kontroldev-theme");
+    if (saved) root.dataset.theme = saved;
+    button?.addEventListener("click", () => {
+      const dark = root.dataset.theme === "dark" || (!root.dataset.theme && matchMedia("(prefers-color-scheme: dark)").matches);
+      root.dataset.theme = dark ? "light" : "dark";
+      localStorage.setItem("kontroldev-theme", root.dataset.theme);
+    });
+  })();
+</script>

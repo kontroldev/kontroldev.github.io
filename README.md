@@ -14,7 +14,7 @@ La web está creada con Swift e [Ignite](https://github.com/twostraws/Ignite), s
 - Tiempo estimado de lectura.
 - Índice interno para artículos extensos.
 - RSS, sitemap y metadatos para buscadores y redes sociales.
-- Diseño responsive con modos claro y oscuro automáticos.
+- Diseño responsive con modos claro y oscuro, inspirado en la estructura del blog de Jorge Calderita y adaptado a la identidad azul de KontrolDev.
 
 ## Estructura
 
@@ -23,7 +23,8 @@ La web está creada con Swift e [Ignite](https://github.com/twostraws/Ignite), s
 ├── .github/workflows/pages.yml
 ├── Assets/
 │   ├── css/main.css
-│   └── og.png
+│   ├── og.png
+│   └── vine-blog-card.svg
 ├── Content/blog/
 │   └── vine-una-app-para-tu-coleccion.md
 ├── Includes/
@@ -39,6 +40,7 @@ La web está creada con Swift e [Ignite](https://github.com/twostraws/Ignite), s
 - `Content/blog/`: artículos Markdown y sus metadatos.
 - `Generator.swift`: portada, tarjetas, filtros, páginas de etiquetas y plantilla de artículo.
 - `Assets/css/main.css`: identidad visual y diseño responsive.
+- `Assets/vine-blog-card.svg`: portada reutilizada por la tarjeta y el artículo de Viñe.
 - `Includes/`: cabecera y pie compartidos.
 - `Build/`: resultado generado por Ignite; no debe editarse manualmente.
 

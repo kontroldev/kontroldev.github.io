@@ -50,7 +50,7 @@ struct RaulGallegoSite: Site {
 struct Home: StaticPage {
     @Environment(\.articles) private var articles
 
-    var title = "Notas"
+    var title = "Blog"
     var description = "Swift, Viñe y el trabajo detrás de cada decisión."
     var image = URL(string: "https://kontroldev.github.io/og.png")
 
@@ -66,7 +66,7 @@ struct Home: StaticPage {
 struct BlogArchive: StaticPage {
     @Environment(\.articles) private var articles
 
-    var title = "Notas"
+    var title = "Blog"
     var description = "Swift, Viñe y el trabajo detrás de cada decisión."
     var path = "/blog/"
 
@@ -84,9 +84,7 @@ struct BlogListing: HTML {
 
     var body: some HTML {
         Section {
-            Text("Notas").font(.title1)
-            Text("Swift, Viñe y el trabajo detrás de cada decisión.")
-                .class("blog-intro")
+            Text("Blog").font(.title1).class("page-title")
 
             NoteFilters()
 
@@ -105,25 +103,32 @@ struct BlogListing: HTML {
 struct NoteCard: HTML {
     let article: Article
 
+    private var displayTags: [String] {
+        Array((article.tags ?? ["Nota"]).prefix(3))
+    }
+
     var body: some HTML {
         Section {
-            Section {
-                Text(article.tags?.first ?? "Nota").class("note-card-category")
-                Text(formatDate(article.date)).class("note-card-date")
-            }
-            .class("note-card-meta")
-
             Text {
                 Link(article.title, target: article)
             }
             .font(.title3)
             .class("note-card-title")
 
-            Text(article.description).class("note-card-summary")
+            Link(target: article) {
+                Image("/vine-blog-card.svg", description: "Portada de \(article.title)")
+                    .class("note-card-image")
+            }
 
             Section {
-                Text("\(article.estimatedReadingMinutes) min de lectura")
-                Span("↗").class("note-card-arrow")
+                Section {
+                    ForEach(displayTags) { tag in
+                        Text(tag).class("note-card-tag")
+                    }
+                }
+                .class("note-card-tags")
+
+                Text(formatNumericDate(article.date)).class("note-card-date")
             }
             .class("note-card-footer")
         }
@@ -139,7 +144,7 @@ struct NoteFilters: HTML {
             Link("Swift", target: "/tags/swift/").class("filter-chip")
             Link("SwiftUI", target: "/tags/swift-u-i/").class("filter-chip")
             Link("Producto", target: "/tags/producto/").class("filter-chip")
-            Link("RSS", target: "/feed.rss").class("filter-chip rss-chip")
+            Link("◔  RSS", target: "/feed.rss").class("rss-link")
         }
         .class("note-filters")
     }
@@ -150,11 +155,9 @@ struct NoteArticle: ArticlePage {
         Group {
             Section {
                 Link("← Todas las notas", target: "/").class("article-back")
-                Text(article.tags?.joined(separator: " · ") ?? "Notas").class("kicker")
                 Text(article.title).font(.title1).class("article-title")
-                Text(article.description).class("article-intro")
-                Text("\(formatDate(article.date)) · \(article.estimatedReadingMinutes) min de lectura")
-                    .class("article-meta")
+                Image("/vine-blog-card.svg", description: "Portada de \(article.title)")
+                    .class("article-image")
             }
             .class("article-header shell")
             .id("contenido")
@@ -180,8 +183,7 @@ struct NotesTagPage: TagPage {
     var body: some HTML {
         Section {
             Link("← Todas las notas", target: "/").class("article-back")
-            Text("Etiqueta").class("kicker")
-            Text(tag.name == "All Tags" ? "Todas" : tag.name).font(.title1)
+            Text(tag.name == "All Tags" ? "Todas" : tag.name).font(.title1).class("page-title")
 
             Section {
                 ForEach(notes) { article in
@@ -199,6 +201,13 @@ private func formatDate(_ date: Date) -> String {
     let formatter = DateFormatter()
     formatter.locale = Locale(identifier: "es_ES")
     formatter.dateFormat = "d MMM yyyy"
+    return formatter.string(from: date)
+}
+
+private func formatNumericDate(_ date: Date) -> String {
+    let formatter = DateFormatter()
+    formatter.locale = Locale(identifier: "es_ES")
+    formatter.dateFormat = "dd/MM/yy"
     return formatter.string(from: date)
 }
 
