@@ -26,6 +26,10 @@ Estos últimos días me he metido de lleno en algo que llevaba tiempo posponiend
 
 La app de Dragon Ball nació hace tiempo como un proyecto colaborativo de prácticas de Git dentro de la comunidad de Discord de MoureDev. La hicimos entre varios para aprender a trabajar en equipo con control de versiones: ramas, pull requests, revisiones cruzadas. Con el paso del tiempo me di cuenta de que ese proyecto necesitaba una refactorización en condiciones, así que estas semanas me puse manos a la obra en serio.
 
+El proyecto original se puede consultar en el repositorio [Proyecto Dragon Ball Swift](https://github.com/kontroldev/Proyecto-Dragon-ball-Swift).
+
+Por ahora, los cambios de esta revisión siguen únicamente en mi copia local. Cuando los publique, lo haré en una rama nueva para que se puedan consultar sin interferir con el trabajo anterior de mis compañeros.
+
 El primer golpe fue descubrir que la app se había quedado sin datos. Uno de mis compañeros de equipo había montado una API propia en Vercel para el proyecto, y en algún momento ese servicio dejó de estar disponible. Sin avisar, sin deprecación, simplemente un día dejó de responder.
 
 Esto me enseñó algo que ya sabía en la teoría pero no había sufrido en la práctica: **cuando tu app depende de una API que no controlas, esa dependencia es un punto de fallo silencioso**. No hay warning en Xcode que te diga "oye, esto se va a caer dentro de tres meses".
