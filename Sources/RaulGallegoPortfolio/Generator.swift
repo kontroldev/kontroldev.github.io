@@ -293,7 +293,7 @@ struct NoteCard: HTML {
             .class("note-card-title")
 
             Link(target: article) {
-                Image("/vine-blog-card.svg", description: "Portada de \(article.title)")
+                Image(articleImagePath(article), description: article.imageDescription)
                     .class("note-card-image")
             }
 
@@ -333,7 +333,7 @@ struct NoteArticle: ArticlePage {
             Section {
                 Link("← Todas las notas", target: "/blog/").class("article-back")
                 Text(article.title).font(.title1).class("article-title")
-                Image("/vine-blog-card.svg", description: "Portada de \(article.title)")
+                Image(articleImagePath(article), description: article.imageDescription)
                     .class("article-image")
             }
             .class("article-header shell")
@@ -386,6 +386,12 @@ private func formatNumericDate(_ date: Date) -> String {
     formatter.locale = Locale(identifier: "es_ES")
     formatter.dateFormat = "dd/MM/yy"
     return formatter.string(from: date)
+}
+
+@MainActor
+private func articleImagePath(_ article: Article) -> String {
+    guard let image = article.image else { return "/og.png" }
+    return URL(string: image)?.path ?? image
 }
 
 private func articleBody(_ html: String) -> String {

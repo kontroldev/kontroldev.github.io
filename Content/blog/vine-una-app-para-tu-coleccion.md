@@ -4,6 +4,8 @@ subtitle: Una aplicación con una dirección clara.
 date: 2026-09-07
 author: Raúl Gallego
 tags: Viñe, Swift, SwiftUI, Producto
+image: https://kontroldev.github.io/vine-blog-card.svg
+alt: Portada de Viñe, una aplicación para disfrutar tu colección de cómics
 ---
 
 # Viñe, una aplicación para disfrutar tu colección de cómics

@@ -25,8 +25,10 @@ La web está creada con Swift e [Ignite](https://github.com/twostraws/Ignite), s
 ├── Assets/
 │   ├── css/main.css
 │   ├── og.png
+│   ├── refactor-blog-card.svg
 │   └── vine-blog-card.svg
 ├── Content/blog/
+│   ├── revision-refactorizacion-codigo.md
 │   └── vine-una-app-para-tu-coleccion.md
 ├── Includes/
 │   ├── site-header.html
@@ -41,7 +43,7 @@ La web está creada con Swift e [Ignite](https://github.com/twostraws/Ignite), s
 - `Content/blog/`: artículos Markdown y sus metadatos.
 - `Generator.swift`: perfil profesional, proyectos, blog, filtros, páginas de etiquetas y plantilla de artículo.
 - `Assets/css/main.css`: identidad visual y diseño responsive.
-- `Assets/vine-blog-card.svg`: portada reutilizada por la tarjeta y el artículo de Viñe.
+- `Assets/*-blog-card.svg`: portadas reutilizadas por las tarjetas y sus artículos.
 - `Includes/`: cabecera y pie compartidos.
 - `Build/`: resultado generado por Ignite; no debe editarse manualmente.
 
