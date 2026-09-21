@@ -626,6 +626,7 @@ button:focus-visible {
 .footer {
   width: 100%;
   min-height: 68px;
+  padding: 14px 16px;
   display: flex;
   flex-direction: column;
   align-items: center;
