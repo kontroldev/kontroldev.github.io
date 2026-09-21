@@ -85,6 +85,17 @@ struct ProfileHome: HTML {
                 )
 
                 ProfessionalCard(
+                    organization: "Comunidades de soporte de Apple",
+                    role: "Colaborador",
+                    meta: "Jul. 2016–actualidad · 10 años contribuyendo",
+                    points: [
+                        "Ayudo a resolver incidencias relacionadas con macOS e iOS y comparto respuestas validadas y recomendadas por la comunidad.",
+                        "Esta trayectoria refuerza mi capacidad de análisis, comunicación y resolución de problemas dentro del ecosistema Apple."
+                    ],
+                    tags: ["Ecosistema Apple", "Soporte técnico", "Comunidad", "Resolución de problemas"]
+                )
+
+                ProfessionalCard(
                     organization: "Comunidad MoureDev",
                     role: "Moderador y colaborador",
                     meta: "Comunidad de desarrollo de software",
@@ -128,19 +139,19 @@ struct ProfileHome: HTML {
                     )
 
                     ProjectCard(
+                        name: "Dragon Ball",
+                        status: "Proyecto colaborativo",
+                        description: "Aplicación iOS con una wiki y buscador de personajes, favoritos persistentes, consumo de una API pública y minijuegos.",
+                        url: "https://github.com/kontroldev/Proyecto-Dragon-ball-Swift",
+                        tags: ["Swift 6", "SwiftUI", "API REST", "Firebase", "async/await"]
+                    )
+
+                    ProjectCard(
                         name: "Proyecto Pomodoro",
                         status: "Proyecto colaborativo",
                         description: "Aplicación de productividad con métricas y estadísticas, desarrollada en colaboración con la comunidad MoureDev.",
                         url: "https://github.com/kontroldev/Proyecto_1_Pomodoro",
                         tags: ["Swift", "SwiftUI", "Colaboración"]
-                    )
-
-                    ProjectCard(
-                        name: "100 días de Swift",
-                        status: "Aprendizaje abierto",
-                        description: "Repositorio público que documenta práctica continuada y aprendizaje dentro del ecosistema Swift.",
-                        url: "https://github.com/kontroldev/100-dias-de-Swift-con-MoureDev",
-                        tags: ["Swift", "Práctica", "Comunidad"]
                     )
 
                     ProjectCard(
