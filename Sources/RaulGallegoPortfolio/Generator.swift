@@ -74,14 +74,14 @@ struct ProfileHome: HTML {
                 Text("Desarrollo").font(.title2).class("section-title")
 
                 ProfessionalCard(
-                    organization: "Kontrol Design Studio",
-                    role: "iOS Developer & Founder",
-                    meta: "Mar. 2026–actualidad · Barcelona",
+                    organization: "MacServiceBcn · Especialistas en Apple",
+                    role: "Técnico informático · Especialista en Apple",
+                    meta: "May. 2025–actualidad · Barcelona · Presencial",
                     points: [
-                        "Desarrollo productos para plataformas Apple desde el concepto y la experiencia de uso hasta la arquitectura, implementación y pruebas.",
-                        "Construyo Viñe como un producto real, haciendo evolucionar una base de código mantenible más allá de ejercicios y tutoriales."
+                        "Encargado de Recepción y Atención al Cliente, responsable de la gestión integral del área de atención al cliente en un entorno tecnológico especializado en hardware de Apple.",
+                        "Combino este trabajo con el desarrollo de Viñe, haciendo evolucionar una base de código mantenible más allá de ejercicios y tutoriales."
                     ],
-                    tags: ["Swift", "SwiftUI", "Arquitectura", "Testing", "Producto"]
+                    tags: ["Hardware de Apple", "Atención al cliente", "Swift", "SwiftUI"]
                 )
 
                 ProfessionalCard(
