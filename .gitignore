@@ -32,3 +32,4 @@ yarn-error.log*
 # Swift and generated site
 /.build/
 /Build/
+xcuserdata/
