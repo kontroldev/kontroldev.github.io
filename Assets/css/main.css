@@ -610,6 +610,13 @@ button:focus-visible {
   background: #222731;
   color: #fff;
 }
+/* El código dentro de un bloque no debe heredar el fondo claro del código en línea */
+.article-body pre code {
+  padding: 0;
+  border-radius: 0;
+  background: transparent;
+  color: inherit;
+}
 .article-footer { padding-bottom: 60px; text-align: left; }
 .back-button {
   display: inline-block;
