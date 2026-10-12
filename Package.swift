@@ -8,9 +8,17 @@ let package = Package(
         .package(url: "https://github.com/twostraws/Ignite.git", from: "0.6.0")
     ],
     targets: [
+        .target(
+            name: "RaulGallegoSite",
+            dependencies: [.product(name: "Ignite", package: "Ignite")]
+        ),
         .executableTarget(
             name: "RaulGallegoPortfolio",
-            dependencies: [.product(name: "Ignite", package: "Ignite")]
+            dependencies: ["RaulGallegoSite"]
+        ),
+        .testTarget(
+            name: "RaulGallegoSiteTests",
+            dependencies: ["RaulGallegoSite"]
         )
     ]
 )
