@@ -617,6 +617,10 @@ button:focus-visible {
   background: transparent;
   color: inherit;
 }
+/* Insignia oficial «Descargar en la App Store»: Apple pide respetar sus proporciones */
+.app-store-badge { margin: 32px 0; }
+.app-store-badge a { display: inline-block; }
+.app-store-badge img { display: block; height: 50px; width: auto; }
 .article-footer { padding-bottom: 60px; text-align: left; }
 .back-button {
   display: inline-block;
